@@ -1,0 +1,41 @@
+*Note que je n'ai pas réussi à trouver la cause de la divergence, ce qui impacte
+ mon abileté à tester correctement les valeurs où la simulation reste stable.
+
+Time Step:
+-Plus elle est petite, plus la simulation est stable, mais la durée de calcul est plus longue.
+-Simulation généralement stable en dessous de 0.01 secondes. Cohérente jusqu'à 0.015, mais commence à briser après ce point.
+-Augmenter CG Iterations peut stabiliser un grand Time Step, mais il y a une limite.
+
+CG Iterations:
+-Plus elle est grande, plus la simulation est stable, mais la durée de calcul est plus longue.
+-Simulation stable si au dessus de 5, mais le comportement devient imprécis et ralenti plus on se rapproche de 0. 0 arrête la simulation.
+
+Young's modulus:
+-Semble contrôler la rigidité des corps mous (plus élevé = plus rigide).
+-3000 à 3500 semble être la limite inférieure. Plus bas et les corps mous commencent à déstabiliser ou diverger.
+-1 000 000 000 peut être atteint et la simulation reste stable, mais les corps deviennent pratiquement impossible à déformer (essentiellement des corps rigides).
+
+Poisson ratio
+-Difficile à percevoir, mais semble controller la "compression" des corps, soit le gain (ou perte) de volume dans la direction perpendiculaire à une force de compression/traction.
+-Est quelque peu relié à la rigidité (le scénario "Beam" converge à une forme plus droite si cette variable est au maximum).
+-Ne semble pas destabiliser la simulation aux valeurs minimale (0.01) et maximale (0.49), mais affecte le réalisme de la simulation.
+
+Density:
+-Contrôle la masse de chaque tétrahèdre. La masse est répartie à entre chaque particule du tétrahèdre.
+-Une masse nulle (0.0) rends la simulation complètement statique (les corps ne bougent pas et ne peuvent pas bouger).
+-Autrement, la simulation est stable jusqu'au maximum donné de 10.0. Par contre, les forces de contact peuvent avoir un peu de difficulté (ex: Beam).
+
+Stiffness (k):
+-Détermine la puissance de la force de correction selon la distance au plan (-k * phi).
+-Trop petite et les corps mous s'enfoncent dans le plan, ou "monte" au lieu de rebondir. 
+	-2500 au minimum semble fournir un bon comportement.
+-Trop grande, et les corps mous ne restent pas au repos (il font des petits bonds à chaque particule), ou rebondissent bien trop.
+	-50000 au maximum ne rebondit pas trop. Le rebond ne devient pas ridicule immédiatement après ce point,
+	 mais les corps mous semblent glisser de plus en plus après ce point.
+
+Damping:
+-Semble contrôler la force opposée à la vitesse actuelle du corps mou, pour "annuler" la vitesse perpendiculaire au plan.
+-Trop petite et les rebonds sont moins précis, mais la simulation ne semble pas déstabiliser, même à 0 (avec les scénarios fournis).
+-Trop grande et les corps mous rebondissent trop. Au dessus de 100 les corps rebondissent trop, et au dessus de 250 ils deviennent instables.
+
+

@@ -30,7 +30,5 @@ Contact::~Contact()
 
 void Contact::computePenaltyForce()
 {
-    // TODO add the contact penalty force to the particle.
-    //
     p->fcontact += n * (-k*phi - n.dot(b * p->xdot));
 }

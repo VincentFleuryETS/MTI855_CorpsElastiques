@@ -369,7 +369,7 @@ void SoftBodyViewer::draw()
 
 void SoftBodyViewer::loadTet()
 {
-    TetMeshLoader loader("D:/ETS/MTI855/Devoir 3 Corps Elastiques/MTI855 Devoir 03a CorpsElastiques src/resources/tet.mesh");
+    TetMeshLoader loader("resources/tet.mesh");
     loader.initMesh(*m_tetMesh);
 
     for (Particle& p : m_tetMesh->getParticles())
@@ -392,7 +392,7 @@ void SoftBodyViewer::loadCube()
     Eigen::Isometry3f initTm;
     initTm.setIdentity();
     initTm.translation() = Eigen::Vector3f(0, 1.0f, 0);
-    TetMeshLoader loader("D:/ETS/MTI855/Devoir 3 Corps Elastiques/MTI855 Devoir 03a CorpsElastiques src/resources/cube.mesh");
+    TetMeshLoader loader("resources/cube.mesh");
     loader.initMesh(*m_tetMesh, initTm);
 
     m_colliders.clear();
@@ -407,7 +407,7 @@ void SoftBodyViewer::loadBeam()
     initTm.setIdentity();
     initTm.translation() = Eigen::Vector3f(0, 1.0f, 0);
 
-    TetMeshLoader loader("D:/ETS/MTI855/Devoir 3 Corps Elastiques/MTI855 Devoir 03a CorpsElastiques src/resources/beam.mesh");
+    TetMeshLoader loader("resources/beam.mesh");
     loader.initMesh(*m_tetMesh, initTm);
 
     for (Particle& p : m_tetMesh->getParticles())
@@ -425,7 +425,7 @@ void SoftBodyViewer::loadBeam()
 
 void SoftBodyViewer::loadBunny()
 {
-    TetMeshLoader loader("D:/ETS/MTI855/Devoir 3 Corps Elastiques/MTI855 Devoir 03a CorpsElastiques src/resources/bunny.mesh");
+    TetMeshLoader loader("resources/bunny.mesh");
     loader.initMesh(*m_tetMesh);
 
     m_colliders.clear();
